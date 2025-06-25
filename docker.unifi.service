@@ -1,0 +1,15 @@
+[Unit]
+Description=Unifi-Network-Application
+Requires=docker.service
+After=docker.service
+
+[Service]
+Type=oneshot
+WorkingDirectory=/opt/docker-unifi-network-app
+ExecStart=/usr/bin/env /usr/bin/docker-compose -f /opt/docker-unifi-network-app/compose.yaml up -d
+ExecStop=/usr/bin/env /usr/bin/docker-compose -f /opt/docker-unifi-network-app/compose.yaml stop 
+#StandardOutput=syslog
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
